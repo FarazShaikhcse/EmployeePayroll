@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeePayrollService {
+	public enum IOService{
+        CONSOLE_IO,FIlE_IO,DB_IO,REST_IO
+    }
+	
 	private List<EmployeePayrollData> employeePayrollList;
 
 	EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
@@ -26,8 +30,12 @@ public class EmployeePayrollService {
 	/**
 	 * method to print employee detail to the console
 	 */
-	private void writeEmployeePayrollData() {
-		System.out.println("\nWriting Employee Payroll to Console Output\n" + employeePayrollList);
+	public void writeEmployeePayrollData(IOService ioService) {
+		if (ioService.equals(IOService.CONSOLE_IO)) {
+			System.out.println("\nWriting Employee Payroll roaster to console\n" + employeePayrollList);
+		} else if (ioService.equals(IOService.FIlE_IO)) {
+			new EmployePayrollFileIo().writeData(employeePayrollList);
+		}
 	}
 
 	public static void main(String[] args) {
@@ -35,8 +43,11 @@ public class EmployeePayrollService {
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
 		Scanner consoleInputReader = new Scanner(System.in);
 		employeePayrollService.readEmployeePayrollData();
-		employeePayrollService.writeEmployeePayrollData();
+		employeePayrollService.writeEmployeePayrollData(IOService.FIlE_IO);
 		consoleInputReader.close();
 	}
+	public long countEntries() {  
+        return new EmployePayrollFileIo().countEntries();
+    }
 
 }
