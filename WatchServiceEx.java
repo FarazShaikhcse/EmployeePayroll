@@ -108,8 +108,5 @@ public class WatchServiceEx {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		Path dir = Paths.get("/Users/farazshabbir/eclipse-workspace/Employee Payroll/src/Data");
-		new WatchServiceEx(dir).processEvents();
-	}
+	
 }

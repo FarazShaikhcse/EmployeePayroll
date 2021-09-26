@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.IntStream;
-
+import java.util.Arrays;
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -48,6 +48,26 @@ public class FileTest{
 		Files.newDirectoryStream(filePath).forEach(System.out::println);
 		Files.newDirectoryStream(filePath, path -> path.toFile().isFile() && path.toString().startsWith("input")).forEach(System.out::println);
 
+	}
+	@Test
+	public void givenADirectoryWhenWatchedListsAllTheActivities() throws IOException {
+		Path dir = Paths.get("/Users/farazshabbir/eclipse-workspace/Employee Payroll/src/Data");
+		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+		new WatchServiceEx(dir).processEvents();
+	}
+
+	@Test
+	public void given4EmployeesWhenWrittenToFileShouldMatchEmployeeEntries() {
+		EmployeePayrollData[] arrayOfEmps = { new EmployeePayrollData(101, " Mark antony", 9999990.90),
+				new EmployeePayrollData(102, "Bill snooker", 4650000.10),
+				new EmployeePayrollData(103, "William Smith", 990200.20),
+				new EmployeePayrollData(104, "John snow ", 9383000.0)};
+				 
+		EmployeePayrollService employeePayrollService;
+		employeePayrollService = new EmployeePayrollService(Arrays.asList(arrayOfEmps));
+		employeePayrollService.writeEmployeePayrollData(EmployeePayrollService.IOService.FIlE_IO);
+		long entries = employeePayrollService.countEntries();
+		Assert.assertEquals(4, entries);
 	}
 	
 }
