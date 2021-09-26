@@ -35,4 +35,15 @@ public class EmployePayrollFileIo {
 		}
 		return entries;
 	}
+	public long printData() {
+		long entries = 0;
+		try {
+			entries = Files.lines(new File(PAYROLL_FILE_NAME).toPath()).count();
+			Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return entries;
+	}
+	
 }

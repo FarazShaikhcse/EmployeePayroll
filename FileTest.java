@@ -69,5 +69,11 @@ public class FileTest{
 		long entries = employeePayrollService.countEntries();
 		Assert.assertEquals(4, entries);
 	}
-	
+	@Test
+	public void given4EmployeesWhenPrintedToConsoleShouldMatchEmployeeEntries() {
+
+		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+
+		Assert.assertEquals(1, employeePayrollService.printData());
+	}
 }
