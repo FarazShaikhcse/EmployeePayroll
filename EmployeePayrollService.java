@@ -8,6 +8,10 @@ public class EmployeePayrollService {
     }
 	
 	private List<EmployeePayrollData> employeePayrollList;
+	
+	EmployeePayrollService() {
+
+	}
 
 	EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
 		this.employeePayrollList = employeePayrollList;
@@ -49,5 +53,8 @@ public class EmployeePayrollService {
 	public long countEntries() {  
         return new EmployePayrollFileIo().countEntries();
     }
+	public long printData() {
+		return new EmployePayrollFileIo().printData();
+	}
 
 }
