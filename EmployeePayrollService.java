@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +11,8 @@ public class EmployeePayrollService {
     }
 	
 	private List<EmployeePayrollData> employeePayrollList;
+	public static final String PAYROLL_FILE_NAME = "/Users/farazshabbir/eclipse-workspace/Employee Payroll/src/Datapayroll.txt";
+
 	
 	EmployeePayrollService() {
 
@@ -56,5 +61,11 @@ public class EmployeePayrollService {
 	public long printData() {
 		return new EmployePayrollFileIo().printData();
 	}
+	public long readFromFile() {
+		this.employeePayrollList = new EmployePayrollFileIo().readData();
+		System.out.println(employeePayrollList.size());
+		return this.employeePayrollList.size();
+	}
+
 
 }
